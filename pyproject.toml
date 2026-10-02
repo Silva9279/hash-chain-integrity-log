@@ -1,0 +1,14 @@
+[project]
+name = "hash-chain-integrity-log"
+version = "0.1.0"
+description = "An append-only log where each entry includes the SHA256 of the previous entry, producing a tamper-evident record chain for audit trails."
+requires-python = ">=3.10"
+dependencies = []
+readme = "README.md"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
