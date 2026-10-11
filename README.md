@@ -35,3 +35,10 @@ The trade-off: this is detection, not prevention. It will not stop someone from 
 - `HashChainLog` — the log class. Constructor: `HashChainLog(clock=None)`. Methods: `append(payload)`, `verify()`, `to_records()`, `from_records(records, clock=None)` (classmethod), `entries` (property), `length` (property), `head()`.
 - `ChainEntry` — frozen dataclass for a single entry. Fields: `index`, `timestamp`, `payload`, `prev_hash`, `hash`. Methods: `to_record()`, `compute_hash()`, `from_record(record)` (classmethod).
 - `VerificationResult` — frozen dataclass. Fields: `valid` (bool), `broken_at` (int or None), `reason` (str or None).
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
